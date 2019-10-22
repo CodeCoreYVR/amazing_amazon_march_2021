@@ -11,9 +11,15 @@
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
-    <div class='container'>
-      <%= yield %>
-    </div>
+      <nav>
+          <%= link_to 'Home', root_path %>
+          |
+          <%= link_to 'About Us', about_path %>
+          |
+          <%= link_to 'Contact Us', contact_path %>
+          |
+          <%= link_to 'New Product', new_product_path %>
+        </nav>
+    <%= yield %>
   </body>
 </html>
