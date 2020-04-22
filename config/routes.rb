@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   root 'welcome#home'
   get('/home', to: 'welcome#home')
   get('/about', to: 'welcome#about')
+  get('/contact_us', to: 'welcome#contact_us')
+  post('/thank_you', to: 'welcome#thank_you')
 end
