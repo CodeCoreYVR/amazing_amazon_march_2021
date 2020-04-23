@@ -10,6 +10,17 @@ class Product < ApplicationRecord
   validates :price, numericality: { greater_than: 0 }
   validates :description, presence: true, length: { minimum: 10 }
 
+  # scope(name, body, &block) is a method that will add a class method for retrieving records
+  # https://api.rubyonrails.org/classes/ActiveRecord/Scoping/Named/ClassMethods.html#method-i-scope
+  # in ruby & rails docks &block means the method accepts a lambda.
+  scope(:search, -> (query) { where("title ILIKE?", "%#{query}%") })
+
+  # you can create a class method that does the same thing.
+
+  def self.search_but_using_class_method(query)
+    where("title ILIKE?", "%#{query}%")
+  end
+
   private
 
   def set_default_price
