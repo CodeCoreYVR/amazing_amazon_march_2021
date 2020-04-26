@@ -53,7 +53,18 @@
   <div class='shadow-sm p-3 mb-1 bg-white rounded'>   
   <%# display_stars is a custom helper method to display stars located in /app/helpers/reviews_helper.rb %>
   <%# all methods defined in any helper file are available in all views :D. We can place complex logic in these helpers to avoid bloating our model. (business logic inside of controller should be kept to a minimum) %>
-    <h4><%= display_stars(review) %></h4>
-    <p><%= review.body %></p>
+    <h4>
+      <%= display_stars(review) %>
+      <%= link_to(
+        "Delete",
+        product_review_path(@product, review),
+        method: :delete,
+        class: 'btn btn-danger float-right',
+        data: { confirm: 'delete this review?' }
+        )
+      %>
+    </h4>
+    <%# adding styles to .review-body inside of 'app/assets/stylesheets/reviews.scss'. Rails will automatically include stylesheets in controllers if the name of the stylesheet is the same name as the controller %>
+    <p class='review-body text-muted'><%= review.body %></p>
   </div>
 <% end %>

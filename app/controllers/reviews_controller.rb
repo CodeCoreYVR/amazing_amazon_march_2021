@@ -10,4 +10,10 @@ class ReviewsController < ApplicationController
       render 'products/show'
     end
   end
+  
+  def destroy
+    @review = Review.find params[:id]
+    @review.delete
+    redirect_to product_path(@review.product)
+  end
 end
