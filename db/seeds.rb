@@ -9,7 +9,7 @@
 Product.destroy_all()
 
 1000.times do
-  created_at = Faker::Date.backward(365)
+  created_at = Faker::Date.backward(days:365)
   Product.create({
     title: Faker::Cannabis.strain,
     description: Faker::Cannabis.health_benefit,
