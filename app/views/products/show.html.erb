@@ -14,7 +14,11 @@
         <span class='badge badge-pill badge-success'><%= number_to_currency @product.price %></span>
       <%# end %>
     </h1>
+    
   </div>
+  <small class='text-muted'>
+    sold by <em><%= @product.user.full_name %></em>
+  <small>
   <hr/>
   <p class='shadow-none p-3 rounded'><%= @product.description %></p>
   <div>
@@ -55,6 +59,7 @@
   <%# all methods defined in any helper file are available in all views :D. We can place complex logic in these helpers to avoid bloating our model. (business logic inside of controller should be kept to a minimum) %>
     <h4>
       <%= display_stars(review) %>
+      <p class='font-weight-lighter d-inline-block'>by <%= review.user.full_name %></p>
       <%= link_to(
         "Delete",
         product_review_path(@product, review),
