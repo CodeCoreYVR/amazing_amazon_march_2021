@@ -1,4 +1,10 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+
+  def index
+    @products = Product.all.order('created_at DESC')
+  end
+
   def new
     @product = Product.new
   end
@@ -8,6 +14,7 @@ class ProductsController < ApplicationController
     # prevent accidentally allowing users to update sensitive model attributes.
     product_params = params.require(:product).permit(:title, :description, :price)
     @product = Product.new product_params
+    @product.user = @current_user
     if @product.save
       # Eventually we will redirect to the show page for the product created
       # render plain: "Product Created"
