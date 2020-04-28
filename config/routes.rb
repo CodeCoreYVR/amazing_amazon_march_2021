@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get '/bill_splitter', to: 'bill_splitter#new'
   post '/calculate_split', to: 'bill_splitter#create'
 
+  # Session Routes
+  resource :session, only: [:new, :create, :destroy]
+
   # RESTful Product Routes
   #  get '/products/new', to: 'products#new', as: :new_product
   #  post '/products', to: 'products#create'

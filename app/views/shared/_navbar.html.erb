@@ -1,12 +1,20 @@
-<nav class='navbar navbar-light bg-light'>
-  <span class='navbar-brand mb-0 h1'>Amazing Amazon 🤩 🙌 📦
-    |
-    <%= link_to 'Home', home_path, class: 'nav-item' %>
-    |
-    <%= link_to 'About', about_path, class: 'nav-item' %>
-    |
-    <%= link_to 'Contact Us', contact_us_path, class: 'nav-item' %>
-    |
-    <%= link_to 'Bill Splitter', bill_splitter_path, class: 'nav-item' %>
-  </span>
+<%# mb-5 is bootstrap for setting the margin bottom to size 5 https://getbootstrap.com/docs/4.4/utilities/spacing/ %>
+<nav class='navbar navbar-light bg-light mb-5'>
+  <ul>
+    <span class='navbar-brand mb-0 h1'>Amazing Amazon 💰🤑
+      <%= link_to 'Home', home_path, class: 'nav-item' %>
+      |
+      <%= link_to 'About', about_path, class: 'nav-item' %>
+      |
+      <%= link_to 'Contact Us', contact_path, class: 'nav-item' %>
+      |
+      <%= link_to 'Bill Splitter', bill_splitter_path, class: 'nav-item' %>
+      |
+      <%= link_to 'View Products', products_path, class: 'nav-item' %>
+    </span>
+  </ul>
+  <div>
+    <%= link_to "Log Out", session_path, method: :delete, class: 'btn btn-danger' %>
+    <%= link_to "Log In", new_session_path, class: 'btn btn-success' %>
+  </div>
 </nav>

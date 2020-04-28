@@ -10,15 +10,24 @@ require_relative '../lib/stdout_helpers'
 
 NUM_OF_PRODUCTS = 1000
 NUM_OF_REVIEWS = 2
+PASSWORD = 'supersecret'
 
 Review.destroy_all()
 Product.destroy_all()
+
+super_user = User.create(
+  first_name: 'jon',
+  last_name: 'snow',
+  email: 'js@winterfell.gov',
+  password: PASSWORD
+)
 
 NUM_OF_USERS.times do |x|
   u = User.create({
     first_name: Faker::Games::SuperSmashBros.fighter,
     last_name: Faker::Name.last_name,
-    email: Faker::Internet.email
+    email: Faker::Internet.email,
+    password: PASSWORD
   })
   Stdout.progress_bar(NUM_OF_USERS, x, "█") { "Creating Users" }
 end

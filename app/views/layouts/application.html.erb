@@ -11,17 +11,10 @@
   </head>
 
   <body>
-      <nav>
-          <%= link_to 'Home', root_path %>
-          |
-          <%= link_to 'About Us', about_path %>
-          |
-          <%= link_to 'Contact Us', contact_path %>
-          |
-          <%= link_to 'All Products', products_path %>
-          |
-          <%= link_to 'New Product', new_product_path %>
-        </nav>
-    <%= yield %>
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/flash_messages' %>
+    <div class='container'>
+      <%= yield %>
+    </div>
   </body>
 </html>
