@@ -30,9 +30,18 @@ Rails.application.routes.draw do
     resources :reviews, shallow: :true, only: [:create, :destroy] do
       resources :likes, only: [:create, :destroy]
     end
+    resources :favourites, shallow: true, only: [:create, :destroy]
   end
 
   resources :news_articles
+  resources :favourites, only: [:index]
+
+  resources :users, only: [:new, :create]
+
+  namespace :admin do 
+    resources :dashboard, only: [:index]
+  end
+
 
   resources :users, only: [:new, :create]
 end

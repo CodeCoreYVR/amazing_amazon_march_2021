@@ -29,13 +29,9 @@ class ProductsController < ApplicationController
     end
   end
 
-  def index
-    # @products = Product.all
-    @products = Product.order(created_at: :DESC)
-  end
-
   def show
     @review = Review.new
+    @favourite = @product.favourites.find_by_user_id current_user if user_signed_in?
   end
 
   def edit
