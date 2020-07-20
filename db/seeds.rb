@@ -12,6 +12,8 @@ NUM_OF_PRODUCTS = 1000
 NUM_OF_REVIEWS = 2
 PASSWORD = 'supersecret'
 NUM_OF_USERS=20
+
+Like.destroy_all()
 Review.destroy_all()
 Product.destroy_all()
 
@@ -45,12 +47,20 @@ NUM_OF_PRODUCTS.times do |x|
     updated_at: created_at
   })
   NUM_OF_REVIEWS.times do
-    Review.create({
+    r = Review.create({
       rating: rand(1..5),
       body: Faker::Hacker.say_something_smart,
       product: product,
       user: users.sample
     })
+    if r.valid? 
+      rand(0..5).times.each do 
+        Like.create(
+          user: users.sample,
+          review: r
+        )
+      end
+    end
   end
   Stdout.progress_bar(NUM_OF_PRODUCTS, x, "█") { "Creating Products with Reviews" }
 end
