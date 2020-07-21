@@ -20,6 +20,7 @@ Product.destroy_all()
 User.destroy_all()
 Tagging.delete_all()
 Tag.delete_all()
+Vote.destroy_all()
 
 super_user = User.create(
   first_name: 'jon',
@@ -73,6 +74,13 @@ NUM_OF_PRODUCTS.times do |x|
           review: r
         )
       end
+      users.shuffle.slice(0..rand(users.count)).each do |user|
+        Vote.create(
+          review: r, 
+          user: user, 
+          is_up: [true, false].sample
+        )
+      end
     end
   end
   Stdout.progress_bar(NUM_OF_PRODUCTS, x, "█") { "Creating Products with Reviews" }
@@ -80,10 +88,14 @@ end
 
 products = Product.all
 reviews = Review.all
+likes = Like.all 
+favourites = Favourite.all 
+votes = Vote.all 
 
 puts Cowsay.say("Generated #{products.count} products with #{NUM_OF_REVIEWS} reviews each!", :sheep)
 puts Cowsay.say("Generated #{users.count}  users!", :turtle)
 # puts Cowsay.say("Generated #{likes.count}  likes!", :bunny)
 puts Cowsay.say("Generated #{tags.count}  tags!", :ghostbusters)
 # puts Cowsay.say("Generated #{favourites.count}  favourites!", :tux)
+puts Cowsay.say("Generated #{votes.count}  votes!", :cow)
 

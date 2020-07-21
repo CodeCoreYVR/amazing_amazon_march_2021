@@ -58,6 +58,14 @@ class Ability
     can :destroy, Favourite do |favourite|
       favourite.user == user 
     end 
-    
+
+    can :vote, Review do |review|
+      review.user != user 
+    end 
+
+    can :crud, Vote do |vote|
+      vote.user == user 
+    end 
+
   end
 end

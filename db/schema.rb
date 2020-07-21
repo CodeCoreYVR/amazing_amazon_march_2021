@@ -89,6 +89,16 @@ ActiveRecord::Schema.define(version: 2021_04_26_204206) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.boolean "is_up"
+    t.bigint "user_id", null: false
+    t.bigint "review_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["review_id"], name: "index_votes_on_review_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
+  end
+
   add_foreign_key "favourites", "products"
   add_foreign_key "favourites", "users"
   add_foreign_key "likes", "reviews"
@@ -99,4 +109,6 @@ ActiveRecord::Schema.define(version: 2021_04_26_204206) do
   add_foreign_key "reviews", "users"
   add_foreign_key "taggings", "products"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "votes", "reviews"
+  add_foreign_key "votes", "users"
 end

@@ -17,6 +17,9 @@ class User < ApplicationRecord
   has_many :favourites, dependent: :destroy 
   has_many :favourited_products, through: :favourites, source: :product 
 
+  has_many :votes, dependent: :destroy 
+  has_many :voted_reviews, through: :votes, source: :review
+
   scope(:created_after, -> (date) { where("created_at < ?", "#{date}") })
   scope(:search, -> (query) { where("first_name ILIKE ? OR last_name ILIKE ? OR email ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%") })
 

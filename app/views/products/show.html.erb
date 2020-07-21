@@ -87,6 +87,25 @@
           <%= link_to 'Like', review_likes_path(review), method: :post %>
         <% end %>
       <% end %>
+      (<%= pluralize review.likes.count, 'like' %>)
+
+      <% vote = review.votes.find_by(user: current_user) %>
+      <span class="vote-widget">
+        <% if vote.nil? %>
+          <%= link_to 'vote up', review_votes_path(review, is_up: true), method: :post %>
+          <%= review.vote_total %>
+          <%= link_to 'vote down', review_votes_path(review, is_up: false), method: :post %>
+        <% elsif vote.is_up? %>
+          <%= link_to 'vote up', vote_path(vote), method: :delete, class: 'active' %>
+          <%= review.vote_total %>
+          <%= link_to 'vote down', vote_path(vote, is_up: false), method: :patch %>
+        <% else %>
+          <%= link_to 'vote up', vote_path(vote, is_up: true), method: :patch %>
+          <%= review.vote_total %>
+          <%= link_to 'vote down', vote_path(vote), method: :delete %>
+        <% end %>
+      </span>
+      (<%= review.vote_total %>)
       <%= link_to(
         "Delete",
         review_path(@product, review),
@@ -100,3 +119,11 @@
     <p class='review-body text-muted'><%= review.body %></p>
   </div>
 <% end %>
+
+<%#
+  
+  <%= link_to(fa_icon('arrow-up')), review_votes_path(review, is_up: true), method: :post %>
+  
+  <%= link_to(fa_icon('arrow-down')), review_votes_path(review, is_up: false), method: :post %>
+
+%>
