@@ -9,3 +9,7 @@ import "channels"
 
 Rails.start()
 ActiveStorage.start()
+
+import "./selectize"
+window.jQuery = $;
+window.$ = $;

@@ -21,6 +21,8 @@
   <small>
   <hr/>
   <p class='shadow-none p-3 rounded'><%= @product.description %></p>
+  <p>Tags:</p>
+  <p><%= @product.tag_names %></p>
   <div>
     <%# link_to() just creates a anchor tag with the appropriate href. The 3rd argument is a optional options hash which can have a :method key; If a :method key is provided Rails will set a data-method attribute to the a tag and adds some additional javascript to the page which makes the anchor tag use the specified http method instead of the default GET. (Basically Rails Magic) 
     <%# https://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#method-i-link_to %>

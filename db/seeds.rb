@@ -10,12 +10,16 @@ require_relative '../lib/stdout_helpers'
 
 NUM_OF_PRODUCTS = 1000
 NUM_OF_REVIEWS = 2
+NUM_OF_TAGS = 10
 PASSWORD = 'supersecret'
 NUM_OF_USERS=20
 
 Like.destroy_all()
 Review.destroy_all()
 Product.destroy_all()
+User.destroy_all()
+Tagging.delete_all()
+Tag.delete_all()
 
 super_user = User.create(
   first_name: 'jon',
@@ -36,6 +40,12 @@ end
 
 users = User.all
 
+NUM_OF_TAGS.times do 
+  Tag.create( name: Faker::Science.scientist )
+end
+
+tags = Tag.all
+
 NUM_OF_PRODUCTS.times do |x|
   created_at = Faker::Date.backward(days: 365)
   product = Product.create({
@@ -46,6 +56,9 @@ NUM_OF_PRODUCTS.times do |x|
     created_at: created_at,
     updated_at: created_at
   })
+
+  product.tags = tags.shuffle.slice(0, rand(1..tags.count))
+  
   NUM_OF_REVIEWS.times do
     r = Review.create({
       rating: rand(1..5),
@@ -68,6 +81,9 @@ end
 products = Product.all
 reviews = Review.all
 
-puts Cowsay.say("Created #{products.count} products with #{NUM_OF_REVIEWS} reviews each!", :sheep)
-puts Cowsay.say("Created #{users.count}  users!", :turtle)
+puts Cowsay.say("Generated #{products.count} products with #{NUM_OF_REVIEWS} reviews each!", :sheep)
+puts Cowsay.say("Generated #{users.count}  users!", :turtle)
+# puts Cowsay.say("Generated #{likes.count}  likes!", :bunny)
+puts Cowsay.say("Generated #{tags.count}  tags!", :ghostbusters)
+# puts Cowsay.say("Generated #{favourites.count}  favourites!", :tux)
 

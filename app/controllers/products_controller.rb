@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
   def create
     # strong parameters are used primarily as a security practice to help
     # prevent accidentally allowing users to update sensitive model attributes.
-    product_params = params.require(:product).permit(:title, :description, :price)
+ 
     @product = Product.new product_params
     @product.user = @current_user
     if @product.save
@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    product_params = params.require(:product).permit(:title, :description, :price)
+    # product_params = params.require(:product).permit(:title, :description, :price )
     @product = Product.find params[:id]
     if @product.update product_params
       redirect_to product_path(@product)
@@ -58,6 +58,13 @@ class ProductsController < ApplicationController
       redirect_to root_path
     end
    end
+  
+
+  def product_params
+    # docs about params.require() https://api.rubyonrails.org/classes/ActionController/Parameters.html#method-i-require
+    # docs about .permit() https://api.rubyonrails.org/classes/ActionController/Parameters.html#method-i-permit
+    params.require(:product).permit(:title, :description, :price, :sale_price, :tag_names)
+  end
 
    def load_product!
     if params[:id].present?
