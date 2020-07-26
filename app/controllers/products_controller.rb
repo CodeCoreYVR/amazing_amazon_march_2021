@@ -4,7 +4,12 @@ class ProductsController < ApplicationController
   before_action :authorize_user!, only: [:edit, :update, :destroy]
 
   def index
-    @products = Product.all.order('created_at DESC')
+    if params[:tag]
+      @tag = Tag.find_or_initialize_by(name: params[:tag])
+      @products = @tag.products.order(created_at: :DESC)
+    else
+      @products = Product.order(created_at: :DESC)
+    end
   end
 
   def new
