@@ -59,4 +59,58 @@ RSpec.describe NewsArticlesController, type: :controller do
       end
     end
   end
+
+  describe "#destroy" do
+    before do
+      @news_article = FactoryBot.create(:news_article)
+    end
+
+    it 'removes a record from the database' do
+      count_before = NewsArticle.count
+      delete :destroy, params: { id: @news_article.id }
+      count_after = NewsArticle.count
+      expect(count_after).to eq(count_before - 1)
+    end
+
+    it 'redirects to the index page' do
+      delete :destroy, params: { id: @news_article.id }
+      expect(response).to redirect_to(news_articles_path)
+    end
+
+    it 'sets a flash message' do
+      delete :destroy, params: { id: @news_article.id }
+      expect(flash[:alert]).to be
+    end
+  end
+
+  describe '#show' do
+    before do
+      @news_article = FactoryBot.create(:news_article)
+      get :show, params: { id: @news_article.id }
+    end
+
+    it 'renders the show template' do
+      expect(response).to render_template(:show)
+    end
+
+    it 'sets an instance variable based on the article id that is passed' do
+      expect(assigns(:news_article)).to eq(@news_article)
+    end
+  end
+
+  describe '#index' do
+    before do
+      get :index
+    end
+
+    it 'renders the index template' do
+      expect(response).to render_template(:index)
+    end
+
+    it 'assigns an instance variable to all created news articles sorted by created_at' do
+      news_article_1 = FactoryBot.create(:news_article)
+      news_article_2 = FactoryBot.create(:news_article)
+      expect(assigns(:news_articles)).to eq([news_article_2, news_article_1])
+    end
+  end
 end
