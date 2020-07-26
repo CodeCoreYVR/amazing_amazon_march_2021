@@ -11,7 +11,7 @@ require_relative '../lib/stdout_helpers'
 NUM_OF_PRODUCTS = 1000
 NUM_OF_REVIEWS = 2
 PASSWORD = 'supersecret'
-
+NUM_OF_USERS=20
 Review.destroy_all()
 Product.destroy_all()
 

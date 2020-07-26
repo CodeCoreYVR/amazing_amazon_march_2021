@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_213406) do
+ActiveRecord::Schema.define(version: 2021_04_26_204206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "news_articles", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "published_at"
+    t.integer "view_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "products", force: :cascade do |t|
     t.string "title"
@@ -21,8 +30,6 @@ ActiveRecord::Schema.define(version: 2020_04_27_213406) do
     t.float "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.float "sale_price"
-    t.integer "hit_count"
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_products_on_user_id"
   end
@@ -42,9 +49,9 @@ ActiveRecord::Schema.define(version: 2020_04_27_213406) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_digest"
   end
 
   add_foreign_key "products", "users"
