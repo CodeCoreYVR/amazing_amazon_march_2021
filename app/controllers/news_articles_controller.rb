@@ -1,5 +1,5 @@
 class NewsArticlesController < ApplicationController
-  before_action :find_news_article, only: [:show, :destroy]
+  before_action :find_news_article, only: [:show, :edit, :update, :destroy]
 
   def new
     @news_article = NewsArticle.new
@@ -20,6 +20,19 @@ class NewsArticlesController < ApplicationController
 
   def index
     @news_articles = NewsArticle.order(created_at: :desc)
+  end
+
+  def edit
+  end
+ 
+  def update
+    if @news_article.update news_article_params
+     flash[:notice] = 'Article updated!'
+     redirect_to @news_article
+    else
+     flash[:alert] = 'Something went wrong, see errors below.'
+     render :edit
+    end
   end
 
   def destroy
