@@ -39,7 +39,9 @@ class Ability
       review.user == user
     end
 
-    # See the wiki for details:
-    # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+    can :crud, NewsArticle do |news_article|
+      news_article.user == user 
+    end
+
   end
 end
