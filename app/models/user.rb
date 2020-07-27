@@ -5,6 +5,8 @@ class User < ApplicationRecord
   has_many :products
   has_many :reviews
 
+  has_many :news_articles, dependent: :nullify
+
   scope(:created_after, -> (date) { where("created_at < ?", "#{date}") })
   scope(:search, -> (query) { where("first_name ILIKE ? OR last_name ILIKE ? OR email ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%") })
 

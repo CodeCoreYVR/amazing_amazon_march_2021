@@ -1,4 +1,5 @@
 class NewsArticlesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
   before_action :find_news_article, only: [:show, :edit, :update, :destroy]
 
   def new
@@ -7,6 +8,7 @@ class NewsArticlesController < ApplicationController
 
   def create
     @news_article = NewsArticle.new news_article_params
+    @news_article.user = current_user
     if @news_article.save
       flash[:notice] = 'Article created!'
       redirect_to @news_article
