@@ -24,7 +24,8 @@ class ProductsController < ApplicationController
     @product = Product.new product_params
     @product.user = @current_user
     if @product.save
-      ProductMailer.notify_product_owner(@product).deliver_now
+      # ProductMailer.notify_product_owner(@product).deliver_now
+      ProductMailer.notify_product_owner(@product).deliver_later
       # Eventually we will redirect to the show page for the product created
       # render plain: "Product Created"
       # instead of the above line we will use :
