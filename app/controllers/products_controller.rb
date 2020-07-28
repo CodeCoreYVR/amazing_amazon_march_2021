@@ -24,11 +24,14 @@ class ProductsController < ApplicationController
     @product = Product.new product_params
     @product.user = @current_user
     if @product.save
+      ProductMailer.notify_product_owner(@product).deliver_now
       # Eventually we will redirect to the show page for the product created
       # render plain: "Product Created"
       # instead of the above line we will use :
       redirect_to @product
       # same as redirect_to product_path(@product)
+      
+      
     else
       # render will simply render the new.html.erb view in the views/products
       # directory. The #new action above will not be touched.

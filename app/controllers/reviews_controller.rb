@@ -10,6 +10,7 @@ class ReviewsController < ApplicationController
     @review.user = @current_user
     
     if @review.save
+      ReviewMailer.notify_product_owner(@review).deliver_now
       redirect_to product_path(@product)
     else
       render 'products/show'

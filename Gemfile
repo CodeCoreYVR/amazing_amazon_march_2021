@@ -22,12 +22,15 @@ gem 'bcrypt', '~> 3.1.7'
 # Gem for authorization
 gem 'cancancan', '~> 3.2.0 '
 
+# A library of icons.  Read more: https://fontawesome.com/
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
-gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -36,6 +39,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
   gem 'faker', '~> 2.11'
+  gem 'letter_opener'
 end
 
 group :development do
