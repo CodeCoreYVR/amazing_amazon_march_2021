@@ -1,4 +1,4 @@
-class Api::V1::ProductsController < ApplicationController
+class Api::V1::ProductsController < Api::ApplicationController
     before_action :find_product,only:[:show]
     def index
         products=Product.order(created_at: :desc)
