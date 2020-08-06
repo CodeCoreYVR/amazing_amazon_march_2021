@@ -16,14 +16,6 @@ Rails.application.routes.draw do
   
   
   post('/thank_you', to: 'welcome#thank_you')
-=======
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root "welcome#home"
-  get("/home", to: "welcome#home")
-  get("/about", to: "welcome#about")
-  get("/contact_us", to: "welcome#contact_us")
-  post("/thank_you", to: "welcome#thank_you")
->>>>>>> 1c10dbc... Amazon API: Product Index
 
   #bill splitter
   get "/bill_splitter", to: "bill_splitter#new"
@@ -83,7 +75,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do #👈🏻 we can set default response format of the block
     namespace :v1 do
-      resources :products, only:[:index]
+      resources :products, only:[:index,:show]
     end
   end
 end
