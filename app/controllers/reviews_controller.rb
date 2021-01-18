@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
+  before_action :load_review!, only: [:destroy]
+  before_action :authorize_user!, only: [:destroy]
 
   def create
     @product = Product.find params[:product_id]
@@ -15,8 +17,25 @@ class ReviewsController < ApplicationController
   end
   
   def destroy
-    @review = Review.find params[:id]
     @review.delete
     redirect_to product_path(@review.product)
   end
+
+  private
+
+  def load_review!
+    if params[:id].present?
+      @review = Review.find params[:id]
+    else
+      @review = Review.new
+    end
+  end
+
+  def authorize_user!
+    unless can? :crud, @review
+      flash[:danger] = "Acess Denied"
+      redirect_to root_path
+    end
+   end
+
 end

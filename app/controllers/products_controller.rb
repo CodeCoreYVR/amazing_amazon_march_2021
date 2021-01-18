@@ -1,12 +1,13 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :load_product!, except: [:create]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
 
   def index
     @products = Product.all.order('created_at DESC')
   end
 
   def new
-    @product = Product.new
   end
 
   def create
@@ -34,12 +35,10 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
     @review = Review.new
   end
 
   def edit
-    @product = Product.find params[:id]
   end
 
   def update
@@ -52,8 +51,24 @@ class ProductsController < ApplicationController
     end
   end
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
     redirect_to products_path
    end
+
+   private
+   def authorize_user!
+    unless can? :crud, @product
+      flash[:danger] = "Acess Denied"
+      redirect_to root_path
+    end
+   end
+
+   def load_product!
+    if params[:id].present?
+      @product = Product.find(params[:id])
+    else
+      @product = Product.new
+    end
+   end
+
 end
