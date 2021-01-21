@@ -32,4 +32,6 @@ Rails.application.routes.draw do
   end
 
   resources :news_articles
+
+  resources :users, only: [:new, :create]
 end
