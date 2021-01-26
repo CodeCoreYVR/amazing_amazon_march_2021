@@ -4,7 +4,9 @@ class ProductsController < ApplicationController
   before_action :authorize_user!, only: [:edit, :update, :destroy]
 
   def index
+  
     if params[:tag]
+
       @tag = Tag.find_or_initialize_by(name: params[:tag])
       @products = @tag.products.order(created_at: :DESC)
     else
@@ -33,6 +35,11 @@ class ProductsController < ApplicationController
       render :new
     end
   end
+
+  # def index
+  #   # @products = Product.all
+  #   @products = Product.order(created_at: :DESC)
+  # end
 
   def show
     @review = Review.new
@@ -72,6 +79,7 @@ class ProductsController < ApplicationController
   end
 
    def load_product!
+    # params_tag= params[:tag]
     if params[:id].present?
       @product = Product.find(params[:id])
     else
