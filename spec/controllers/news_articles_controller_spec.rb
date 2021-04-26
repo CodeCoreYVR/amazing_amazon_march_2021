@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+# rails generate rspec:controller news_aricles --controller-specs --no-request-specs
 RSpec.describe NewsArticlesController, type: :controller do
   describe '#new' do
     it 'renders the new template' do 
