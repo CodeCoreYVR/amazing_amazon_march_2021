@@ -2,8 +2,7 @@ Rails.application.routes.draw do
  
   root 'welcome#home'
   get('/about', { to: 'welcome#about', as: :about })
-  get('/contact_us', { to: 'contacts#index', as: :contact })
-  post('/contact_us', { to: 'contacts#create' })
+  get('/contact_us', { to: 'welcome#contact_us', as: :contact })
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   get('/home', to: 'welcome#home')
