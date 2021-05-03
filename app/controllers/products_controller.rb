@@ -78,7 +78,7 @@ class ProductsController < ApplicationController
   def product_params
     # docs about params.require() https://api.rubyonrails.org/classes/ActionController/Parameters.html#method-i-require
     # docs about .permit() https://api.rubyonrails.org/classes/ActionController/Parameters.html#method-i-permit
-    params.require(:product).permit(:title, :description, :price, :sale_price, :tag_names)
+    params.require(:product).permit(:title, :description, :price, :tag_names)
   end
 
    def load_product!
