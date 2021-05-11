@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
  
   root 'welcome#home'
   get('/about', { to: 'welcome#about', as: :about })
