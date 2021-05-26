@@ -5,9 +5,7 @@ class ProductSerializer < ActiveModel::Serializer
     :description,
     :price,
     :created_at,
-    :updated_at,
-    :sale_price,
-    :hit_count
+    :updated_at
   )
   belongs_to :user, key: :seller
 
