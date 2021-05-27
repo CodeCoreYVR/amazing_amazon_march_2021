@@ -45,6 +45,7 @@ group :development, :test do
   gem 'faker', '~> 2.11'
   gem 'letter_opener'
   gem 'rack-cors'
+  gem 'rails_same_site_cookie', '~> 0.1.0'
 end
 
 group :development do
