@@ -17,5 +17,6 @@ class ProductSerializer < ActiveModel::Serializer
 
   class ReviewSerializer < ActiveModel::Serializer
     attributes(:id, :body, :rating)
+    belongs_to(:user, key: :reviewer)
   end
 end
