@@ -1,6 +1,7 @@
 class Api::ApplicationController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  rescue_from StandardError, with: :standard_error
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
 
@@ -54,6 +55,22 @@ class Api::ApplicationController < ApplicationController
     render(
       json: { status: 422, errors: errors },
       status: :unprocessable_entity
+    )
+  end
+
+  def standard_error(error)
+
+    logger.error error.full_message
+
+    render(
+      status:500,
+      json:{
+        status:500, #alias :internal_server_error
+        errors:[{
+          type: error.class.to_s,
+          message: error.message
+        }]
+      }
     )
   end
 end
