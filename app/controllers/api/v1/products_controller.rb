@@ -12,8 +12,7 @@ class Api::V1::ProductsController < Api::ApplicationController
     def show
         if @product
             render(
-                json: @product,
-                include: [ :seller, { reviews: [ :reviewer ] } ]
+                json: @product
             )
         else
             render(json: {error: "Product Not Found" })
