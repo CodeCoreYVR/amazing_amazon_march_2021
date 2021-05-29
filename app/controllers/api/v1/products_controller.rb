@@ -11,11 +11,9 @@ class Api::V1::ProductsController < Api::ApplicationController
 
     def show
         if @product
-            render(
-                json: @product
-            )
+            render json: @product
         else
-            render(json: {error: "Product Not Found" })
+            render(json: { status: 404 }, status: 404)
         end
     end
 
@@ -49,7 +47,7 @@ class Api::V1::ProductsController < Api::ApplicationController
     end
 
     def product_params
-        params.require(:product).permit(:title, :description, :price, tag_ids:[])
+        params.require(:product).permit(:title, :description, :price, :created_at, :reviews)
     end
 
     def authorize!
